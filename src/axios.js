@@ -1,63 +1,86 @@
+// import axios from 'axios';
+// import _ from 'lodash';
+// import config from './config';
+
+// const instance = axios.create({
+//     baseURL: process.env.REACT_APP_BACKEND_URL,
+//     withCredentials: true
+// });
+
+// const createError = (httpStatusCode, statusCode, errorMessage, problems, errorCode = '') => {
+//     const error = new Error();
+//     error.httpStatusCode = httpStatusCode;
+//     error.statusCode = statusCode;
+//     error.errorMessage = errorMessage;
+//     error.problems = problems;
+//     error.errorCode = errorCode + "";
+//     return error;
+// };
+
+// export const isSuccessStatusCode = (s) => {
+//     // May be string or number
+//     const statusType = typeof s;
+//     return (statusType === 'number' && s === 0) || (statusType === 'string' && s.toUpperCase() === 'OK');
+// };
+
+// instance.interceptors.response.use(
+//     (response) => {
+//         // Thrown error for request with OK status code
+//         const { data } = response;
+//         if (data.hasOwnProperty('s') && !isSuccessStatusCode(data['s']) && data.hasOwnProperty('errmsg')) {
+//             return Promise.reject(createError(response.status, data['s'], data['errmsg'], null, data['errcode'] ? data['errcode'] : ""));
+//         }
+
+//         // Return direct data to callback
+//         if (data.hasOwnProperty('s') && data.hasOwnProperty('d')) {
+//             return data['d'];
+//         }
+//         // Handle special case
+//         if (data.hasOwnProperty('s') && _.keys(data).length === 1) {
+//             return null;
+//         }
+//         return response.data;
+//     },
+//     (error) => {
+//         const { response } = error;
+//         if (response == null) {
+//             return Promise.reject(error);
+//         }
+
+//         const { data } = response;
+
+//         if (data.hasOwnProperty('s') && data.hasOwnProperty('errmsg')) {
+//             return Promise.reject(createError(response.status, data['s'], data['errmsg']));
+//         }
+
+//         if (data.hasOwnProperty('code') && data.hasOwnProperty('message')) {
+//             return Promise.reject(createError(response.status, data['code'], data['message'], data['problems']));
+//         }
+
+//         return Promise.reject(createError(response.status));
+//     }
+// );
+
+// export default instance;
+
 import axios from 'axios';
-import _ from 'lodash';
-import config from './config';
 
 const instance = axios.create({
+    // Lấy URL từ file .env (http://localhost:8080)
     baseURL: process.env.REACT_APP_BACKEND_URL,
-    withCredentials: true
+    // withCredentials: true // Mở dòng này nếu bạn có dùng Cookie/Session
 });
-
-const createError = (httpStatusCode, statusCode, errorMessage, problems, errorCode = '') => {
-    const error = new Error();
-    error.httpStatusCode = httpStatusCode;
-    error.statusCode = statusCode;
-    error.errorMessage = errorMessage;
-    error.problems = problems;
-    error.errorCode = errorCode + "";
-    return error;
-};
-
-export const isSuccessStatusCode = (s) => {
-    // May be string or number
-    const statusType = typeof s;
-    return (statusType === 'number' && s === 0) || (statusType === 'string' && s.toUpperCase() === 'OK');
-};
-
+console.log("Check URL: ", process.env.REACT_APP_BACKEND_URL);
+// Interceptor cho phản hồi (Response)
 instance.interceptors.response.use(
     (response) => {
-        // Thrown error for request with OK status code
+        // Trả về thẳng response.data để ở Login.js bạn nhận được {errCode, errMessage, user}
         const { data } = response;
-        if (data.hasOwnProperty('s') && !isSuccessStatusCode(data['s']) && data.hasOwnProperty('errmsg')) {
-            return Promise.reject(createError(response.status, data['s'], data['errmsg'], null, data['errcode'] ? data['errcode'] : ""));
-        }
-
-        // Return direct data to callback
-        if (data.hasOwnProperty('s') && data.hasOwnProperty('d')) {
-            return data['d'];
-        }
-        // Handle special case
-        if (data.hasOwnProperty('s') && _.keys(data).length === 1) {
-            return null;
-        }
         return response.data;
     },
     (error) => {
-        const { response } = error;
-        if (response == null) {
-            return Promise.reject(error);
-        }
-
-        const { data } = response;
-
-        if (data.hasOwnProperty('s') && data.hasOwnProperty('errmsg')) {
-            return Promise.reject(createError(response.status, data['s'], data['errmsg']));
-        }
-
-        if (data.hasOwnProperty('code') && data.hasOwnProperty('message')) {
-            return Promise.reject(createError(response.status, data['code'], data['message'], data['problems']));
-        }
-
-        return Promise.reject(createError(response.status));
+        // Xử lý khi có lỗi kết nối hoặc lỗi từ server (404, 500...)
+        return Promise.reject(error);
     }
 );
 
