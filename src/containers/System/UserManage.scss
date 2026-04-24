@@ -1,0 +1,25 @@
+.btn-edit{
+    width: 50px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: chocolate;
+
+    &:hover{
+        background-color: transparent !important;
+        color: chocolate;
+    }
+}
+
+.btn-delete{
+    width: 50px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: rgb(248, 25, 25);
+
+    &:hover{
+        background-color: transparent !important;
+        color: rgb(210, 30, 30);
+    }
+}
