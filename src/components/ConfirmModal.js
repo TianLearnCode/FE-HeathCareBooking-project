@@ -30,10 +30,21 @@ class ConfirmModal extends Component {
     }
 
     handlerKeyDown = (event) => {
+        
+        // const keyCode = event.which || event.keyCode;
+        // if (keyCode === KeyCodeUtils.ENTER) {
+        //     if (!this.acceptBtnRef.current || this.acceptBtnRef.current.disabled) return;
+        //     this.acceptBtnRef.current.click();
+        // }
+
+        if (!this.props.contentOfConfirmModal.isOpen) return;
+
         const keyCode = event.which || event.keyCode;
         if (keyCode === KeyCodeUtils.ENTER) {
-            if (!this.acceptBtnRef.current || this.acceptBtnRef.current.disabled) return;
-            this.acceptBtnRef.current.click();
+            event.preventDefault(); // Ngăn chặn hành động mặc định của trình duyệt
+            if (this.acceptBtnRef.current && !this.acceptBtnRef.current.disabled) {
+                this.acceptBtnRef.current.click();
+            }
         }
     }
 
@@ -58,7 +69,7 @@ class ConfirmModal extends Component {
         const { contentOfConfirmModal } = this.props;
 
         return (
-            <Modal isOpen={contentOfConfirmModal.isOpen} className='confirm-modal' centered={true}>
+            <Modal isOpen={contentOfConfirmModal.isOpen} toggle={this.onClose} className='confirm-modal' centered={true}>
                 <div className="modal-header">
                     <div className="modal-title">
                         <FormattedMessage id={"common.confirm"} />

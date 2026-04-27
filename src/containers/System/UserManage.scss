@@ -23,3 +23,19 @@
         color: rgb(210, 30, 30);
     }
 }
+
+.modal-user-container{
+    .modal-content{
+        .modal-header{
+            button{
+                background-color: transparent !important;
+                outline: none;
+                border: none;
+                color: white;
+                font-size: 28px;
+
+            }
+        }
+    }
+    
+}
