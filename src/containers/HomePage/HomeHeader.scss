@@ -1,0 +1,198 @@
+.home-header-container{
+    height: 90px;
+    width: 100%;
+    padding: 0 28px;
+
+    .home-header-content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+        .left-content{
+            width: 25%;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            .header-logo{
+                
+                background: url('../../assets/logo.svg') center  center no-repeat;
+                background-size: contain;
+                width: 50%;
+                height: 100%;
+                cursor: pointer;
+            }
+            i{
+                font-size: 25px;
+                color: grey;
+            }
+
+        }
+        .middle-content{
+            width: 50%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .child-content{
+                .sub-title{
+                    font-weight: 400;
+                    font-size: 12px;
+                }
+            }
+
+        }
+        .right-content{
+            width: 25%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            .support{
+                padding-right: 50px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                i{
+                    font-size: 15px;
+                    margin-right: 5px;
+                    color: #2a69f5;
+                }
+            }
+            .language-vn{
+                cursor: pointer;
+                margin: 0 8px;
+                &active{
+                    color: red;
+                }
+            }
+            .language-en{
+
+                cursor: pointer;
+                &active{
+                    color: rgb(47, 175, 255);
+                }
+            }
+        }
+
+
+    }
+}
+
+.home-header-banner{
+    background: linear-gradient(rgba(41, 41, 41, 0.5), rgba(0, 0, 0, 0.2)), 
+                url('../../assets/194054554-why-are-americans-skipping-healthcare-services.png') center center no-repeat;    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+
+    .content-top{
+        .title1{
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 2px #ffffff;
+            font-size: 30px;
+            margin-top: 30px;
+        }
+        .title2{
+            margin-top: 15px;
+            text-align: center;
+            color: white;
+            font-size: 30px;
+            text-shadow: 2px 2px 2px #ffffff;
+            font-weight: 200px;
+        }
+        .search{
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+            width: 700px;
+            border-radius: 30px;
+            background-color: rgb(254, 254, 254);
+            i{
+                margin: 0 8px;
+                font-size: 16px;
+                color: rgb(0, 0, 0);
+            }
+            input{
+                width: 670px;
+                height: 28px;
+                background: transparent;
+                border: none;
+                outline: none;
+                font-size: 16px;
+            }
+        }
+    }
+    .content-bottom{
+        width: 100%;
+
+        .options{
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            margin-top: 40px;
+            justify-content: space-evenly;
+            // width: 100%;
+            
+            .option-child{
+                padding: 12px 8px;
+                border-radius: 16px;
+                background-color: rgba(139, 139, 139, 0.5);
+                border: 1px solid rgb(210, 210, 210);
+                width: 100px;
+                text-align: center;
+                
+
+                &:hover {
+                    background-color: #f0f0f0; 
+                    border-color: #4381ff;
+                    color: #4381ff;
+
+
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    cursor: pointer;
+                    .icon-child {
+                        background-color: #2a69f5; // Đổi màu icon đậm hơn khi hover
+                        transform: scale(1.1); // Icon to lên một chút
+                    }
+
+                    .text-child {
+                        color: #4381ff; // Đổi màu chữ theo màu chủ đạo
+                    }
+                }
+                .text-child{
+                    color: rgb(255, 255, 255);
+                    align-items: center;
+                    text-align: center;
+                    font-weight: 500;
+
+                }
+
+                .icon-child{
+                    width: 40px;
+                    height: 40px;
+                    padding: 10px;
+                    border-radius: 50%;
+                    background-color: #4381ff;
+                    margin: 0 auto;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                    i{
+                        font-size: 20px;
+                        color: rgb(255, 255, 255);
+                    }
+                }
+                
+            }
+        }
+    }
+    
+}
