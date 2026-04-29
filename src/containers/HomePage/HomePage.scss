@@ -77,6 +77,45 @@
         background-color: rgb(245, 245, 245);
 
     }
+    &.section-about{
+        height: max-content;
+        padding:20px 0px;
+        margin: 0 80px;
+        border-top: 2px solid rgb(218, 218, 218);
+        border-bottom: 2px solid  rgb(218, 218, 218);
+
+        .section-about-header{
+            font-weight: 600;
+            font-size: 20px;
+            text-transform: uppercase;
+
+            margin: 18px;
+        }
+        .section-about-content{
+            display: flex;
+            width: 100%;
+            // justify-content: space-between;
+            gap: 10px;
+            .content-left{
+                width: 60%;
+            }
+            .content-right{
+                width: 40%;
+                padding: 8px;
+                p{
+                    font-style: italic;
+                }
+            }
+        }
+    }
+    &.section-homefooter{
+        text-align: center;
+        padding: 8px;
+    }
+
+
+
+
     height: max-content;
     // width: 100%;
     // margin: 30px 50px;
@@ -186,6 +225,12 @@
     .section-doctor{
         
     }
+
+    // .section-about{
+    //     height: max-content;
+    //     margin: 0 50px;
+        
+    // }
     
 }
 
