@@ -20,7 +20,9 @@
         "child3": "Khám tổng quát",
         "child4": "Xét nghiệm y học",
         "child5": "Sức khỏe tinh thân",
-        "child6": "Khám nha khoa"
+        "child6": "Khám nha khoa",
+        "placeholder": "Tìm bác sĩ, chuyên khoa..."
+
 
 
     },

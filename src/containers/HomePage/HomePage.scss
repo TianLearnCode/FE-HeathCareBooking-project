@@ -1,0 +1,194 @@
+.slick-prev, .slick-next {
+                z-index: 100;
+                width: 44px !important;
+                height: 44px !important;
+                background: #fff !important; /* Nền trắng sạch sẽ */
+                border-radius: 50% !important; /* Bo tròn hoàn toàn */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important; /* Đổ bóng nhẹ cho sang */
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                transition: all 0.3s ease; /* Hiệu ứng mượt khi hover */
+
+                &:hover {
+                    background: #cdd3ff !important;
+                    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2) !important;
+                    transform: scale(1.1); /* Phóng to nhẹ khi di chuột vào */
+                }
+
+                /* Vị trí nút Prev */
+                &.slick-prev {
+                    left: -20px !important;
+                }
+
+                /* Vị trí nút Next */
+                &.slick-next {
+                    right: -20px !important;
+                }
+            }
+
+            /* Tùy chỉnh icon mũi tên bên trong */
+            .slick-prev:before, .slick-next:before {
+                font-family: "Font Awesome 5 Free" !important; /* Dùng Font Awesome cho đẹp */
+                font-weight: 900 !important;
+                color: #6d3ae3 !important; /* Màu xanh y tế giống logo của Quang */
+                font-size: 20px !important;
+                opacity: 1 !important;
+            }
+
+            /* Gán icon cụ thể từ Font Awesome */
+            .slick-prev:before {
+                content: "\f053" !important; /* Icon mũi tên trái */
+            }
+
+            .slick-next:before {
+                content: "\f054" !important; /* Icon mũi tên phải */
+            }
+
+            /* Ẩn nút nếu slide bị disabled */
+            .slick-disabled {
+                display: none !important;
+            }
+
+
+
+
+.section-specialty{
+    
+}
+//==========================SPECIALTY==========================
+.section-main{
+    &.section-specialty{
+
+    }
+    &.section-medical-faccility{
+        background-color: rgb(245, 245, 245);
+        
+    }
+    &.section-doctor{
+        .doctor-img{
+            display: flex;
+            justify-content: center;
+            
+        }
+    }
+
+    &.section-handbook{
+        background-color: rgb(245, 245, 245);
+
+    }
+    height: max-content;
+    // width: 100%;
+    // margin: 30px 50px;
+    padding: 0 30px;
+    overflow: hidden;
+    .section-container{
+        margin: 30px 40px;
+        .section-header{
+            height: 60px;
+            display: flex;
+            // flex-direction: column;
+            justify-content: space-between; // Đẩy 2 phần tử về 2 phía
+            align-items: center;
+            span {
+                font-size: 20px;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: #333;
+            }
+
+            button {
+                cursor: pointer;
+                padding: 8px 15px;
+                border: none;
+                outline: none;
+                background: #ebebeb;
+                color: #4836d6;
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: 600;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: #6c62de;
+                    color: #fff;
+                }
+            }
+        }
+
+        .section-body{
+
+            .section-share{
+                outline: none;
+                padding: 0 10px;
+                .section-customize{
+                    outline: none;
+                    padding: 10px; // Tạo khoảng cách giữa các slide
+                    cursor: pointer;
+                    border: 1px solid rgb(174, 151, 202);
+                    border-radius: 8px;
+                    // margin: 0 10px;
+                    background-color: white;
+
+                    .bg-image {
+                        width: 100%;
+                        height: 160px;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        border-radius: 8px;
+                        &.specialty-img{
+
+                        }
+                        &.medical-img{
+
+                        }
+                        &.doctor-img{
+                           img{
+                                width: 120px;
+                                height: 120px;
+                                border-radius: 50%;
+                           }
+                            
+                        }
+                        &.handbook-img{
+
+                        }
+                        img {
+                        
+                            width: 100%;
+                            height: 150px;
+                            object-fit: cover; // Quan trọng: Giữ ảnh không bị bóp méo
+                            border-radius: 8px; // Bo góc ảnh cho hiện đại
+                        }
+                    }
+                    
+
+                    .title-section {
+                        text-align: center;
+                        font-weight: 500;
+                        color: #333;
+                        margin-top: 10px;
+                        font-size: 15px;
+
+                        &:hover {
+                            color: #6f1ff0; // Đổi màu chữ khi di chuột vào khối
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+    }
+
+    .section-doctor{
+        
+    }
+    
+}
+
+
+
+

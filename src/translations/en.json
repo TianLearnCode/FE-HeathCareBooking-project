@@ -21,7 +21,8 @@
         "child3": "General Checkup",
         "child4": "Medical Tests",
         "child5": "Mental Health",
-        "child6": "Dental Care"
+        "child6": "Dental Care",
+        "placeholder": "Searching Doctor, Speciality..."
 
 
     },

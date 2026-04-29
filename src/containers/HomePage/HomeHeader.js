@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './HomeHeader.scss'
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import {LANGUAGES} from '../../utils'
+import {changLanguaguesApp} from '../../store/actions'
+import { dispatch } from '../../redux';
+import { lang } from 'moment/moment';
 class HomeHeader extends Component {
 
+   
+    changeLanguages = (language) =>{
+        this.props.changLanguaguesAppRedux(language)
+        // console.log(changLanguaguesAppRedux(language))
+    }
     render() {
-       
+       let language = this.props.language;
+    //    const { intl } = this.props;
+    //    let placeHolderLangText = intl.FormattedMessage({id: 'banner.placeholder'})
         return (
             <React.Fragment>
                 <div className='home-header-container'>
@@ -39,8 +50,8 @@ class HomeHeader extends Component {
                                 <i className='fas fa-question-circle'></i> <FormattedMessage id ="home-header.support"/>
                             </div>
 
-                            <div className='language-vn active'>VN</div>
-                            <div className='language-en active'>EN</div>
+                            <div className={language === LANGUAGES.VI ? 'language-vn active' : 'language-vn'}><span onClick={() => this.changeLanguages(LANGUAGES.VI)}>VN</span></div>
+                            <div className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'}><span onClick={() => this.changeLanguages(LANGUAGES.EN)}>EN</span></div>
 
                         </div>
 
@@ -53,7 +64,12 @@ class HomeHeader extends Component {
                         <div className='title2'><FormattedMessage id="banner.title2"/></div>
                         <div className='search'>
                             <i className='fas fa-search'></i>
-                            <input type='text' placeholder='Tìm chuyên khoa...'/>
+                            {/* <input type='text' placeholder='{placeHolderLangText}'/> */}
+                            <FormattedMessage id="banner.placeholder">
+                                {placeholder => (
+                                    <input type='text' placeholder={placeholder} />
+                                )}
+                            </FormattedMessage>
                         </div>
                     </div>
                     <div className='content-bottom'>
@@ -129,6 +145,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        changLanguaguesAppRedux:(language) => dispatch(changLanguaguesApp(language))//fire event
     };
 };
 
