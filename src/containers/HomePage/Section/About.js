@@ -20,7 +20,11 @@ class About extends Component {
                 </div>
                 <div className='section-about-content'>
                     <div className='content-left'>
-                        <iframe width="100%" height="400px" src="https://www.youtube.com/embed/xdadfvT9k3I" title="YouMed Tìm bác sĩ chính xác - Đặt lịch khám dễ dàng" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe width="100%" height="400px" src="https://www.youtube.com/embed/xdadfvT9k3I" title="YouMed Tìm bác sĩ chính xác - Đặt lịch khám dễ dàng" 
+                        frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; 
+                        web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen>
+
+                        </iframe>
                     </div>
 
                     <div className='content-right'>

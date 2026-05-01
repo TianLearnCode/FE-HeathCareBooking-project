@@ -22,6 +22,9 @@
     }
 
     .languages{
+        .welcome-user{
+            margin: 0 10px;
+        }
         .language-vn{
             cursor: pointer;
             &.active{
