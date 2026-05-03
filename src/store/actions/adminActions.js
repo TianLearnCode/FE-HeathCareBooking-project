@@ -10,6 +10,7 @@ export const fetchGenderStart = () =>{
     //đưa về catch để bắt lỗi truyền vào fetch failed vào catch
     return async(dispatch, getState) =>{
         try{
+            dispatch({type: actionTypes.FETCH_GENDER_START})
             let response = await getAllCodeService('GENDER')
             if(response && response.errCode === 0){
                 console.log('Check get state: ', getState)

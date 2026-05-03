@@ -1,0 +1,23 @@
+.preview-img-container{
+    // display: flex;
+    // flex-direction: column;
+    .label-upload{
+        background-color: rgb(210, 210, 210);
+        // padding: 8px;
+        cursor: pointer;
+        border-radius: 8px;
+        // width: 100%;
+        &:hover{
+            background-color: rgb(228, 228, 228);
+        }
+    }
+    .preview-image{
+        height: 50px;
+        width: 100%;
+        cursor: pointer;
+        // border: 1px solid black;
+        background-color: rgb(212, 212, 212);
+        background: center center no-repeat;
+        background-size: contain;
+    }
+}

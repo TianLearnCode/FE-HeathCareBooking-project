@@ -1,6 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
+    isLoadingGender: false,
     genders: [], // state lưu giới tính
     roles: [],// state role
     positions: []//...
@@ -10,22 +11,27 @@ const adminRecuder = (state = initialState, action) => {
     switch (action.type) {
         //=======================case gender=======================
         case actionTypes.FETCH_GENDER_START:
+            let copyStateGender = {...state}
+            copyStateGender.isLoadingGender  = true
             console.log('Fire fetch gender start', action)
             return {
-                ...state,
+                ...copyStateGender,
                 
             }
         case actionTypes.FETCH_GENDER_SUCCESS:
-            let copyStateGender = {...state}; //state = initState mà initState có genders[], roles[], positions[]
-            copyStateGender.genders = action.data
-            console.log('Fire fetch gender success', copyStateGender)
+             //state = initState mà initState có genders[], roles[], positions[]
+            state.genders = action.data;
+            state.isLoadingGender  = false; //mustate
+
+            console.log('Fire fetch gender success', action)
 
             return{
-                ...copyStateGender,
+                ...state,
             }
         case actionTypes.FETCH_GENDER_FAILED: 
             console.log('Fire fetch gender failed', action)
-
+            state.isLoadingGender  = false;
+            state.genders = [];
             return{
                 ...state
             }

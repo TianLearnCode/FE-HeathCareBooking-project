@@ -4,13 +4,18 @@ import { connect } from 'react-redux';
 import {getAllCodeService} from '../../../services/userService'
 import { LANGUAGES } from '../../../utils';
 import * as actions from '../../../store/actions'
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'
+import './UserRedux.scss'
 class UserRedux extends Component {
     constructor(props){
         super(props);
         this.state = {
             genderArr:[],
             positionArr:[],
-            roleArr: []
+            roleArr: [],
+            previewImgUrl: '',
+            isOpen: false
         }
     }
     state = {
@@ -50,11 +55,30 @@ class UserRedux extends Component {
         this.props.getRoleStart();
     }
 
+    handleOnChangeImg = (event) =>{
+        let data = event.target.files;
+        let file = data[0]
+        if(file){
+            let objectUrl = URL.createObjectURL(file)
+            this.setState({
+                previewImgUrl: objectUrl
 
+            })
+        }
+    }
+    openPreviewImg = () => {
+        if(!this.state.previewImgUrl){
+            return
+        }
+        this.setState({
+            isOpen: true
+        })
+    }
     render() {
         // console.log('Check state genderArr', this.state.genderArr)
         // console.log('Check state positionArr', this.state.positionArr)
         let genders = this.state.genderArr;
+        let isLoadingGender = this.props.isLoadingGender
         let positions = this.state.positionArr;
         let roles = this.state.roleArr;
         let language = this.props.language;
@@ -69,6 +93,7 @@ class UserRedux extends Component {
             <div className='user-redux-container'>
                 <div className="title" >User Redux</div>
                 <div className='user-redux-body'>
+                    
                     <div className='container'>
                         <div className='row border bg-light.bg-gradient'>
                             <div className='col-12 my-3 title'><FormattedMessage id='manage-user.add'/></div>
@@ -132,8 +157,18 @@ class UserRedux extends Component {
                                 </select>
                             </div>
                             <div className='col-3'>
-                                <label><FormattedMessage id='manage-user.image'/></label>
-                                <input className='form-control' type='text'/>
+                                <label className='form-label'><FormattedMessage id='manage-user.image'/></label>
+                                <div className='preview-img-container '>
+                                    <input id='previewImg' type='file' hidden
+                                        onChange={(event) => this.handleOnChangeImg(event)}
+                                    />
+                                    <label className='label-upload form-control' htmlFor='previewImg'>Tải ảnh <i className='fas fa-upload'></i></label>
+                                    <div className='preview-image' style={{backgroundImage: `url(${this.state.previewImgUrl})`}}
+                                        onClick={() => this.openPreviewImg()}
+                                    >
+                                        
+                                    </div>
+                                </div>
                             </div>
 
                             <div className='col-12 my-5'>
@@ -143,10 +178,17 @@ class UserRedux extends Component {
                             
                         </div>
                     </div>
-                    
-                    
-                </div>
+                    {this.state.isOpen === true &&
+                        <Lightbox
+                            mainSrc={this.state.previewImgUrl}
+                            onCloseRequest={() => this.setState({ isOpen: false })}
+                            
+                        />
+                    }
 
+                
+                </div>
+                    
             </div>
         )
     }
@@ -158,6 +200,7 @@ const mapStateToProps = state => {// đưa dữ liệu từ store reducer vào t
     return {
         language: state.app.language, //state của app (appReducer) được định nghĩa trong rootReducer
         genderRedux: state.admin.genders, //state của admin (adminReducer) được định nghĩa trong rootReducer và lấy ra dữ liệu của genders
+        isLoadingGender: state.admin.isLoadingGender,
         positionRedux: state.admin.positions,
         roleRedux: state.admin.roles
         
