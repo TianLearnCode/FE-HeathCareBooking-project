@@ -7,6 +7,7 @@ import * as actions from '../../../store/actions'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'
 import './UserRedux.scss'
+import TableManageUser from './TableManageUser';
 class UserRedux extends Component {
     constructor(props){
         super(props);
@@ -15,7 +16,18 @@ class UserRedux extends Component {
             positionArr:[],
             roleArr: [],
             previewImgUrl: '',
-            isOpen: false
+            isOpen: false,
+
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            address: '',
+            gender: '',
+            position: '',
+            role: '',
+            avatar: ''
         }
     }
     state = {
@@ -30,24 +42,45 @@ class UserRedux extends Component {
             //ban đầu khi chạy thì quá khứ prevProps.genderRedux (genderRedux lúc đầu rỗng) rỗng 
             //nó so sánh xem có bằng với hiện tại hay không this.props.genderRedux (lúc này this.props.genderRedux đã lấy được API nên không rỗng)
             //vì thế điều khiện !== là đúng => chạy tiếp vào cập nhật state
+            let arrGender = this.props.genderRedux
             this.setState({ 
-                genderArr: this.props.genderRedux //chạy vào setState nạp phần tử vào genderArr
+                genderArr: arrGender, //chạy vào setState nạp phần tử vào genderArr
+                gender: arrGender && arrGender.length > 0 ? arrGender[0].key : ''
+
             })
         } 
         if(prevProps.positionRedux !== this.props.positionRedux){
+            let arrPosition = this.props.positionRedux
             this.setState({
-                positionArr: this.props.positionRedux
+                positionArr: arrPosition,
+                positiom: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : ''
             })
         }
         if(prevProps.roleRedux !== this.props.roleRedux){
+            let arrRole = this.props.roleRedux
             this.setState({
-                roleArr: this.props.roleRedux
+                roleArr: arrRole,
+                role: arrRole && arrRole.length > 0 ? arrRole[0].key : ''
 
             })
 
         }
         //sau đó vì hiện tại đã có số phần tử = quá khứ nên hàm didupdate sẽ không chạy nữa 
 
+        if(prevProps.listUsers !== this.props.listUsers){
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                address: '',
+                gender: '',
+                position: '',
+                role: '',
+                avatar: ''
+            })
+        }
     }
     async componentDidMount() {
         this.props.getGenderStart();//fire action
@@ -61,7 +94,8 @@ class UserRedux extends Component {
         if(file){
             let objectUrl = URL.createObjectURL(file)
             this.setState({
-                previewImgUrl: objectUrl
+                previewImgUrl: objectUrl,
+                avatar: file
 
             })
         }
@@ -74,6 +108,50 @@ class UserRedux extends Component {
             isOpen: true
         })
     }
+    
+    checkValidateInput = () =>{
+        let isValid = true
+
+        let arrCheck = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address']
+        for(let i = 0; i < arrCheck.length;i++){
+            if(!this.state[arrCheck[i]]){
+                isValid = false
+                alert('Missing data at ' + arrCheck[i])
+                break;
+            }
+        }
+        return {
+            isValid
+        }
+    }
+    onChangeInput = (event, id) =>{
+        let copyState = {...this.state} 
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        })
+    }
+    handleSaveUser = () =>{
+        let  check = this.checkValidateInput()
+        console.log('valid: ', check.isValid)
+        if(check.isValid === false){
+            return 
+        }
+        //fire action redux
+
+        this.props.createNewUser({
+            email: this.state.email,
+            password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            phoneNumber: this.state.phoneNumber,
+            gender: this.state.gender,
+            roleId: this.state.role,
+            positionId: this.state.position
+        })
+        // this.props.getFetchUserData();
+    }
     render() {
         // console.log('Check state genderArr', this.state.genderArr)
         // console.log('Check state positionArr', this.state.positionArr)
@@ -82,10 +160,11 @@ class UserRedux extends Component {
         let positions = this.state.positionArr;
         let roles = this.state.roleArr;
         let language = this.props.language;
-        console.log('Check redux state mapped to props of react(gender): ', this.props.genderRedux)
-        console.log('Check redux state mapped to props of react(position): ', this.props.positionRedux)
-        console.log('Check redux state mapped to props of react(role): ', this.props.roleRedux)
+        // console.log('Check redux state mapped to props of react(gender): ', this.props.genderRedux)
+        // console.log('Check redux state mapped to props of react(position): ', this.props.positionRedux)
+        // console.log('Check redux state mapped to props of react(role): ', this.props.roleRedux)
 
+        let {email, password, firstName, lastName, phoneNumber, address, gender, position, role, avatar} = this.state
 
 
 
@@ -99,35 +178,53 @@ class UserRedux extends Component {
                             <div className='col-12 my-3 title'><FormattedMessage id='manage-user.add'/></div>
                             <div className='col-3'>
                                 <label><FormattedMessage id='manage-user.firstName'/></label>
-                                <input className='form-control' type='text'/>
+                                <input className='form-control' type='text'
+                                    value={firstName}
+                                    onChange={(event) => {this.onChangeInput(event, 'firstName')}}
+                                />
                             </div>
                             <div className='col-3'>
                                 <label><FormattedMessage id='manage-user.lastName'/></label>
-                                <input className='form-control' type='text'/>
+                                <input className='form-control' type='text'
+                                    value={lastName}
+                                    onChange={(event) => {this.onChangeInput(event, 'lastName')}}
+                                />
                             </div>
                             <div className='col-3'>
                                 <label><FormattedMessage id='manage-user.email'/></label>
-                                <input className='form-control' type='email'/>
+                                <input className='form-control' type='email'
+                                    value={email}
+                                    onChange={(event) => {this.onChangeInput(event, 'email')}}
+                                />
                             </div>
                             <div className='col-3'>
                                 <label><FormattedMessage id='manage-user.password'/></label>
-                                <input className='form-control' type='password'/>
+                                <input className='form-control' type='password'
+                                    value={password}
+                                    onChange={(event) => {this.onChangeInput(event, 'password')}}
+                                />
                             </div>
                             <div className='col-3'>
                                 <label><FormattedMessage id='manage-user.phoneNumber'/></label>
-                                <input className='form-control' type='text'/>
+                                <input className='form-control' type='text'
+                                    value={phoneNumber}
+                                    onChange={(event) => {this.onChangeInput(event, 'phoneNumber')}}
+                                />
                             </div>
                             <div className='col-9'>
                                 <label><FormattedMessage id='manage-user.address'/></label>
-                                <input className='form-control' type='text'/>
+                                <input className='form-control' type='text'
+                                    value={address}
+                                    onChange={(event) => {this.onChangeInput(event, 'address')}}
+                                />
                             </div>
                             <div className='col-3'>
                                 <label className="form-label"><FormattedMessage id='manage-user.gender'/></label>
-                                <select className="form-select">
+                                <select className="form-select" onChange = {(event) => {this.onChangeInput(event, 'gender')}}>
                                     {
                                         genders && genders.length > 0 && genders.map((item, index) =>{
                                             return(
-                                                <option key={index}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
+                                                <option key={index} value={item.key}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
                                             )
                                         })
                                     
@@ -137,20 +234,20 @@ class UserRedux extends Component {
                             </div>
                             <div className='col-3'>
                                 <label className="form-label"><FormattedMessage id='manage-user.position'/></label>
-                                <select className="form-select">
+                                <select className="form-select" onChange = {(event) => {this.onChangeInput(event, 'position')}}>
                                     {positions && positions.length > 0 && positions.map((item, index) =>{
                                         return(
-                                            <option key={index}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
+                                            <option key={index} value={item.key}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
                                         )
                                     })}
                                 </select>
                             </div>
                             <div className='col-3'>
                                 <label className="form-label"><FormattedMessage id='manage-user.role'/></label>
-                                <select className="form-select">
+                                <select className="form-select" onChange = {(event) => {this.onChangeInput(event, 'role')}}>
                                     {roles && roles.length > 0 && roles.map((item, index) =>{
                                         return(
-                                            <option key={index}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
+                                            <option key={index} value={item.key}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
                                         )
                                     })
                                     }
@@ -160,6 +257,7 @@ class UserRedux extends Component {
                                 <label className='form-label'><FormattedMessage id='manage-user.image'/></label>
                                 <div className='preview-img-container '>
                                     <input id='previewImg' type='file' hidden
+                                        
                                         onChange={(event) => this.handleOnChangeImg(event)}
                                     />
                                     <label className='label-upload form-control' htmlFor='previewImg'>Tải ảnh <i className='fas fa-upload'></i></label>
@@ -172,12 +270,17 @@ class UserRedux extends Component {
                             </div>
 
                             <div className='col-12 my-5'>
-                                <button className='btn btn-primary form-control'><FormattedMessage id='manage-user.save'/></button>
+                                <button className='btn btn-primary form-control' onClick={() => this.handleSaveUser()}><FormattedMessage id='manage-user.save'/></button>
 
                             </div>  
-                            
+                            <div className='col-12'>
+                                <TableManageUser/>
+                                
+                            </div>
                         </div>
+                        
                     </div>
+                    
                     {this.state.isOpen === true &&
                         <Lightbox
                             mainSrc={this.state.previewImgUrl}
@@ -202,7 +305,9 @@ const mapStateToProps = state => {// đưa dữ liệu từ store reducer vào t
         genderRedux: state.admin.genders, //state của admin (adminReducer) được định nghĩa trong rootReducer và lấy ra dữ liệu của genders
         isLoadingGender: state.admin.isLoadingGender,
         positionRedux: state.admin.positions,
-        roleRedux: state.admin.roles
+        roleRedux: state.admin.roles,
+        listUsers: state.admin.users
+
         
     };
 };
@@ -212,7 +317,10 @@ const mapDispatchToProps = dispatch => {//khai báo hàm dispatch
 
         getGenderStart:() => dispatch(actions.fetchGenderStart()),
         getPositionStart: () => dispatch(actions.fetchPositionStart()),
-        getRoleStart: () => dispatch(actions.fetchRoleStart())
+        getRoleStart: () => dispatch(actions.fetchRoleStart()),
+        createNewUser: (data) => dispatch (actions.createNewUser(data)),
+        getFetchUserData: () => dispatch(actions.fetchAllUserStart())
+        
         // fetchGenderStartAppRedux:(gender) => dispatch(actions.fetchGenderStart(gender))//fire event
         
     };

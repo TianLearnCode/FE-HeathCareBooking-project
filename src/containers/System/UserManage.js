@@ -31,7 +31,7 @@ class UserManage extends Component {
         let response = await getAllUsers('ALL')
         if(response && response.errCode === 0){
             this.setState({
-                arrUsers: response.user
+                arrUsers: response.users
             })
         }
     }
