@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {getAllCodeService} from '../../../services/userService'
-import { LANGUAGES, CRUD_ACTION, CRUD_ACTIONS } from '../../../utils';
+import { LANGUAGES, CRUD_ACTION, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'
@@ -57,7 +57,7 @@ class UserRedux extends Component {
             let arrPosition = this.props.positionRedux
             this.setState({
                 positionArr: arrPosition,
-                positiom: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : ''
+                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : ''
             })
         }
         if(prevProps.roleRedux !== this.props.roleRedux){
@@ -83,17 +83,13 @@ class UserRedux extends Component {
                 lastName: '',
                 phoneNumber: '',
                 address: '',
-                gender: '',
-                position: '',
-                role: '',
+                gender: this.state.genderArr && this.state.genderArr.length > 0 ? this.state.genderArr[0].key : '',
+                role: this.state.roleArr && this.state.roleArr.length > 0 ? this.state.roleArr[0].key : '',
+                position: this.state.positionArr && this.state.positionArr.length > 0 ? this.state.positionArr[0].key : '',
                 avatar: '',
+                action: CRUD_ACTIONS.CREATE,
+                previewImgUrl: ''
 
-                // gender: arrGender && arrGender.length > 0 ? arrGender[0].key : '',
-
-                // positiom: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : '',
-
-                // role: arrRole && arrRole.length > 0 ? arrRole[0].key : '',
-                action : CRUD_ACTIONS.CREATE,
 
             })
         }
@@ -104,14 +100,15 @@ class UserRedux extends Component {
         this.props.getRoleStart();
     }
 
-    handleOnChangeImg = (event) =>{
+    handleOnChangeImg = async(event) =>{
         let data = event.target.files;
         let file = data[0]
         if(file){
+            let base64 = await CommonUtils.getBase64(file);
             let objectUrl = URL.createObjectURL(file)
             this.setState({
                 previewImgUrl: objectUrl,
-                avatar: file
+                avatar: base64
 
             })
         }
@@ -149,7 +146,7 @@ class UserRedux extends Component {
     }
     handleSaveUser = () =>{
         let  check = this.checkValidateInput()
-        console.log('valid: ', check.isValid)
+        // console.log('valid: ', check.isValid)
         let {action} = this.state
         if(check.isValid === false){
             return 
@@ -165,7 +162,8 @@ class UserRedux extends Component {
                 phoneNumber: this.state.phoneNumber,
                 gender: this.state.gender,
                 roleId: this.state.role,
-                positionId: this.state.position
+                positionId: this.state.position,
+                image: this.state.avatar,
             
             })
         // this.props.getFetchUserData();
@@ -184,12 +182,18 @@ class UserRedux extends Component {
                 gender: this.state.gender,
                 roleId: this.state.role,
                 positionId: this.state.position,
-                // avatar: this.state.avatar
+                image: this.state.avatar
             })
         }
         
     }
     handleEditUserFromParent = (user) =>{
+        let imageBase64 = ''
+        if(user.image){
+            // const imageBuffer = Buffer.from(JSON.stringify(user.image))
+            imageBase64 = new Buffer(user.image, 'base64').toString('binary');
+        }
+        
         this.setState({
                 email: user.email,
                 password: 'hardcode',
@@ -201,7 +205,7 @@ class UserRedux extends Component {
                 position: user.positionId,
                 role: user.roleId,
                 avatar: '',
-
+                previewImgUrl: imageBase64,
                 action: CRUD_ACTIONS.EDIT,
                 userEditId: user.id
 
@@ -293,16 +297,6 @@ class UserRedux extends Component {
                                 </select>
                             </div>
                             <div className='col-3'>
-                                <label className="form-label"><FormattedMessage id='manage-user.position'/></label>
-                                <select className="form-select" onChange = {(event) => {this.onChangeInput(event, 'position')}} value={position}>
-                                    {positions && positions.length > 0 && positions.map((item, index) =>{
-                                        return(
-                                            <option key={index} value={item.key}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
-                                        )
-                                    })}
-                                </select>
-                            </div>
-                            <div className='col-3'>
                                 <label className="form-label"><FormattedMessage id='manage-user.role'/></label>
                                 <select className="form-select" onChange = {(event) => {this.onChangeInput(event, 'role')}} value={role}>
                                     {roles && roles.length > 0 && roles.map((item, index) =>{
@@ -313,6 +307,19 @@ class UserRedux extends Component {
                                     }
                                 </select>
                             </div>
+                            <div className='col-3'>
+                                <label className="form-label"><FormattedMessage id='manage-user.position'/></label>
+                                <select className="form-select" onChange = {(event) => {this.onChangeInput(event, 'position')}} value={position}
+                                    disabled={this.state.role !== 'R2' ? true : false}
+                                    >
+                                    {positions && positions.length > 0 && positions.map((item, index) =>{
+                                        return(
+                                            <option key={index} value={item.key}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                            
                             <div className='col-3'>
                                 <label className='form-label'><FormattedMessage id='manage-user.image'/></label>
                                 <div className='preview-img-container '>
