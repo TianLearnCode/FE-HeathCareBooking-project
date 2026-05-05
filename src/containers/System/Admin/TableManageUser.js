@@ -30,9 +30,13 @@ class TableManageUser extends Component {
     }
 
     handleDelete = (user)=>{
+        
         this.props.deleteUserAction(user.id)
     }
-    
+    handleEdit = (user) =>{
+        console.log('edit test: ',user)
+        this.props.handleEditUserFromParentKey(user)
+    }
 
     /*** Với front end có life cycle (vòng đời) khi chạy
      * Run component:
@@ -78,7 +82,7 @@ class TableManageUser extends Component {
                                 <td>{item.address}</td>
                                 <td>{item.roleId}</td>
                                 <td className='text-center'> 
-                                    <button className='btn-edit' ><i className='fas fa-pencil-alt'></i></button> 
+                                    <button className='btn-edit' onClick={() => {this.handleEdit(item)}}><i className='fas fa-pencil-alt'></i></button> 
                                     <button className='btn-delete' onClick={()=>{this.handleDelete(item)}}><i className='fas fa-trash-alt'></i></button> 
 
                                 </td>

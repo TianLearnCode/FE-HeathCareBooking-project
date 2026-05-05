@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService, createNewUserService, getAllUsers, deleteUserService } from '../../services/userService';//gọi hàm xử lý việc gọi api 
+import { getAllCodeService, createNewUserService, getAllUsers, deleteUserService, editUserService } from '../../services/userService';//gọi hàm xử lý việc gọi api 
 import { dispatch } from '../../redux';
 import {toast} from 'react-toastify'
 import { act } from 'react';
@@ -154,6 +154,39 @@ export const fetchAllUserSuccess = (userData) => ({
 
 export const fetchAllUserFailed = () =>({
     type: actionTypes.FETCH_ALLUSER_FAILED
+})
+
+//========================================edit user===============================
+export const editUsersStart = (data) =>{
+    return async(dispatch, getSate) =>{
+        try{
+            let response = await editUserService(data)
+            if(response && response.errCode === 0){
+                toast.success("Update user succeed!!!")
+
+                dispatch(editUserSuccess());
+                dispatch(fetchAllUserStart())
+            }else{
+                dispatch(editUserFailed());
+                toast.error("Update user failed!!!", response.errMessage)
+                
+            }
+        }
+        catch(e){
+            dispatch(editUserFailed());
+            toast.error("Update user failed!!!")
+
+            console.log(e)
+        }
+    }
+}
+
+export const editUserSuccess = () =>({
+    type: actionTypes.EDIT_USER_SUCCESS,
+})
+
+export const editUserFailed = () =>({
+    type: actionTypes.EDIT_USER_FAILED,
 })
 
 //========================================delete user===============================

@@ -40,6 +40,10 @@ const actionTypes = Object.freeze({
     //Fetch all user
     FETCH_ALLUSER_SUCCESS: 'FETCH_ALLUSER_SUCCESS',
     FETCH_ALLUSER_FAILED: 'FETCH_ALLUSER_FAILED',
+    
+    //Edit user
+    EDIT_USER_SUCCESS: 'EDIT_USER_SUCCESS',
+    EDIT_USER_FAILED: 'EDIT_USER_FAILED',
 
     //Delete user
     DELETE_USER_SUCCESS: 'DELETE_USER_SUCCESS',
