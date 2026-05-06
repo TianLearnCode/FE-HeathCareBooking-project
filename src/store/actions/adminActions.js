@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService, createNewUserService, getAllUsers, deleteUserService, editUserService } from '../../services/userService';//gọi hàm xử lý việc gọi api 
+import { getAllCodeService, createNewUserService, getAllUsers, deleteUserService, editUserService, getTopDoctorHomeService } from '../../services/userService';//gọi hàm xử lý việc gọi api 
 import { dispatch } from '../../redux';
 import {toast} from 'react-toastify'
 import { act } from 'react';
@@ -134,7 +134,7 @@ export const fetchAllUserStart = () =>{
     return async (dispatch, getState) =>{
         try{
             let response = await getAllUsers('ALL')
-            // console.log('Check fetch all user API: ')
+            
             if(response && response.errCode === 0){
                 
                 dispatch(fetchAllUserSuccess(response.users.reverse()))
@@ -219,5 +219,31 @@ export const deleteUserFailed = () =>({
     type: actionTypes.DELETE_USER_FAILED
 })
 
+//=========================get doctor===================
+export const fetchTopDoctorStart = () =>{
+    return async(dispatch, getState)=>{
+        try{
+            let response = await getTopDoctorHomeService('10')
+            if(response && response.errCode === 0){
+                dispatch(fetchTopDoctorSuccess(response.data))
 
+            }else{
+                dispatch(fetchTopDoctorFailed())
+
+            }
+        }
+        catch(e){
+            dispatch(fetchTopDoctorFailed())
+            console.log('Fetch doctor fail: ',e)
+        }
+    }
+
+}
+export const fetchTopDoctorSuccess = (doctorData) =>({
+    type: actionTypes.FETCH_TOP_DOCTOR_SUCCESS,
+    data: doctorData
+})
+export const fetchTopDoctorFailed = ()=>({
+    type: actionTypes.FETCH_TOP_DOCTOR_FAILED,
+})
 //Chạy đến reducer

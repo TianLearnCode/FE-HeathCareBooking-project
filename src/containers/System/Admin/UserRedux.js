@@ -221,6 +221,7 @@ class UserRedux extends Component {
         let isLoadingGender = this.props.isLoadingGender
         let positions = this.state.positionArr;
         let roles = this.state.roleArr;
+        console.log('check role: ',roles)
         let language = this.props.language;
         // console.log('Check redux state mapped to props of react(gender): ', this.props.genderRedux)
         // console.log('Check redux state mapped to props of react(position): ', this.props.positionRedux)
@@ -288,7 +289,7 @@ class UserRedux extends Component {
                                     {
                                         genders && genders.length > 0 && genders.map((item, index) =>{
                                             return(
-                                                <option key={index} value={item.key}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
+                                                <option key={index} value={item.keyMap}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
                                             )
                                         })
                                     
@@ -301,7 +302,7 @@ class UserRedux extends Component {
                                 <select className="form-select" onChange = {(event) => {this.onChangeInput(event, 'role')}} value={role}>
                                     {roles && roles.length > 0 && roles.map((item, index) =>{
                                         return(
-                                            <option key={index} value={item.key}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
+                                            <option key={index} value={item.keyMap}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
                                         )
                                     })
                                     }
@@ -314,7 +315,7 @@ class UserRedux extends Component {
                                     >
                                     {positions && positions.length > 0 && positions.map((item, index) =>{
                                         return(
-                                            <option key={index} value={item.key}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
+                                            <option key={index} value={item.keyMap}>{language === LANGUAGES.VI ? item.valueVI : item.valueEN}</option>
                                         )
                                     })}
                                 </select>

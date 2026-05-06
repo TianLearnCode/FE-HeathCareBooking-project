@@ -6,7 +6,8 @@ const initialState = {
     genders: [], // state lưu giới tính
     roles: [],// state role
     positions: [],//...
-    users: []
+    users: [],
+    topDoctor: []
 }
 
 const adminRecuder = (state = initialState, action) => {
@@ -91,6 +92,19 @@ const adminRecuder = (state = initialState, action) => {
         case actionTypes.FETCH_ALLUSER_FAILED:
             console.log('Fire fetch user data table failed ', action)
             state.users = []
+            return{
+                ...state
+            }
+        //================================case doctor===================================
+        case actionTypes.FETCH_TOP_DOCTOR_SUCCESS:
+            console.log('Fire fetch top doctor success ', action)
+            state.topDoctor = action.data;
+            return {
+                ...state
+            }
+        case actionTypes.FETCH_TOP_DOCTOR_FAILED:
+            console.log('Fire fetch top doctor failed ', action)
+            state.topDoctor = [];
             return{
                 ...state
             }
