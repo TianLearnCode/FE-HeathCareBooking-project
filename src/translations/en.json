@@ -59,7 +59,11 @@
         "save": "Save user",
         "edit": "Save change"
 
-    }   
+    },
+    "homepage": {
+        "outstanding-doc": "Last week's featured doctor",
+        "see-more":"See more"
+    }
 
     
 }

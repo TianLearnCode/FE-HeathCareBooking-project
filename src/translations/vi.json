@@ -58,6 +58,10 @@
         "save": "Lưu người dùng",
         "edit": "Lưu chỉnh sửa"
 
-    }   
+    },
+    "homepage": {
+        "outstanding-doc": "Bác sĩ nổi bật tuần qua",
+        "see-more":"Xem thêm"
+    }
 
 }

@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import doctorImg from '../../../assets/doctor/doctor.png'
 import { LANGUAGES } from '../../../utils';
 import * as actions from '../../../store/actions'
+import { FormattedMessage } from 'react-intl';
 
 class OutStandingDoctor extends Component {
     constructor(props){
@@ -32,8 +33,8 @@ class OutStandingDoctor extends Component {
             <div className='section-main section-doctor'>
                 <div className='section-container'>
                     <div className='section-header'>
-                        <span>Bác sĩ nổi bật</span>
-                        <button>Xem thêm</button>
+                        <span><FormattedMessage id="homepage.outstanding-doc"/></span>
+                        <button><FormattedMessage id="homepage.see-more"/></button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props}>
