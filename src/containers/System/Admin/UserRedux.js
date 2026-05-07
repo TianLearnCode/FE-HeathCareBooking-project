@@ -49,7 +49,7 @@ class UserRedux extends Component {
             let arrGender = this.props.genderRedux
             this.setState({ 
                 genderArr: arrGender, //chạy vào setState nạp phần tử vào genderArr
-                gender: arrGender && arrGender.length > 0 ? arrGender[0].key : ''
+                gender: arrGender && arrGender.length > 0 ? arrGender[0].keyMap : ''
 
             })
         } 
@@ -57,14 +57,14 @@ class UserRedux extends Component {
             let arrPosition = this.props.positionRedux
             this.setState({
                 positionArr: arrPosition,
-                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : ''
+                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : ''
             })
         }
         if(prevProps.roleRedux !== this.props.roleRedux){
             let arrRole = this.props.roleRedux
             this.setState({
                 roleArr: arrRole,
-                role: arrRole && arrRole.length > 0 ? arrRole[0].key : ''
+                role: arrRole && arrRole.length > 0 ? arrRole[0].keyMap : ''
 
             })
 
@@ -83,12 +83,13 @@ class UserRedux extends Component {
                 lastName: '',
                 phoneNumber: '',
                 address: '',
-                gender: this.state.genderArr && this.state.genderArr.length > 0 ? this.state.genderArr[0].key : '',
-                role: this.state.roleArr && this.state.roleArr.length > 0 ? this.state.roleArr[0].key : '',
-                position: this.state.positionArr && this.state.positionArr.length > 0 ? this.state.positionArr[0].key : '',
+                gender: this.state.genderArr && this.state.genderArr.length > 0 ? this.state.genderArr[0].keyMap : '',
+                role: this.state.roleArr && this.state.roleArr.length > 0 ? this.state.roleArr[0].keyMap : '',
+                position: this.state.positionArr && this.state.positionArr.length > 0 ? this.state.positionArr[0].keyMap : '',
                 avatar: '',
                 action: CRUD_ACTIONS.CREATE,
-                previewImgUrl: ''
+                previewImgUrl: '',
+                userEditId: ''
 
 
             })

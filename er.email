@@ -1,0 +1,89 @@
+[33mcommit a5b45bd2e3069eacdc8ca5024b6fbed7002c9db7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Wed May 6 15:59:59 2026 +0700
+
+    Display top doctor to UI
+
+[33mcommit e7f302cb6a8cc6cbf5d036a6479dae347b0b6e4b[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Tue May 5 19:00:33 2026 +0700
+
+    Finish Upload and Edit User Image
+
+[33mcommit 0668cd05d4f9af134f27de12a64d8e732c75a2a5[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Tue May 5 16:23:38 2026 +0700
+
+    Create Edit User by Redux
+
+[33mcommit 2def04976a2bd355fe0c92843b8bdbd9ba210e7f[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Mon May 4 15:46:05 2026 +0700
+
+    Create Read, Delete User by Redux
+
+[33mcommit e18c72e418289e3823c6ab78b1d09ae12ff20872[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Sun May 3 16:22:52 2026 +0700
+
+    Finish fetch data, upload image file and import react-lightbox lib
+
+[33mcommit c688a6fde57f1eb4e9e656c06334df517eb07b10[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Sat May 2 20:15:31 2026 +0700
+
+    demo fetch gender, position, role to select bar
+
+[33mcommit 6e84c8b7832f71ec3d7544773ceb7765dd6608e0[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Fri May 1 15:04:43 2026 +0700
+
+    Update Manage Page UI, Update change language reload page
+
+[33mcommit 743ccb8a5701a7e3b7be6216e747463e5f9ef573[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Wed Apr 29 21:20:05 2026 +0700
+
+    Update UI add change language feature for UserMange, fix header bug
+
+[33mcommit 7a825189fefe87cf96ff953b409f3bdd7750fe80[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Wed Apr 29 18:07:59 2026 +0700
+
+    Update HomePage UI & Finish Languages Changing
+
+[33mcommit a45d715fd362f323ffebc414f164e3407b20a63b[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Mon Apr 27 20:29:53 2026 +0700
+
+    Design HomePage UI, Scripts language
+
+[33mcommit 29d6ca5af6f72a5066dd6630fd2d253441144bc6[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Mon Apr 27 15:36:41 2026 +0700
+
+    Create feature for Create, Delete, Update user
+
+[33mcommit 203eba77632d4b371bf63221cce1f02101382a99[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Fri Apr 24 16:05:28 2026 +0700
+
+    Call API get user from BA
+
+[33mcommit ec6e8336a1ca2eb293589955bc746151bf92f49a[m
+Author: Tran Vo Nhut Quang <email-cua-quang@example.com>
+Date:   Thu Apr 23 18:11:56 2026 +0700
+
+    React FE
+
+[33mcommit b0f772df40c293463f1958c50c13c71534c3c04e[m
+Author: Hary Pham <haryphamdev@gmail.com>
+Date:   Sun Jun 13 08:39:48 2021 +0700
+
+    update env
+
+[33mcommit f7fbbd8fabf0c5ff0b3b2261fc43a76d6cad9f3d[m
+Author: Hary Pham <haryphamdev@gmail.com>
+Date:   Sat Jun 12 22:54:37 2021 +0700
+
+    init project

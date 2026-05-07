@@ -39,14 +39,19 @@ class OutStandingDoctor extends Component {
                         <Slider {...this.props}>
                            
                             {allDoctor && allDoctor.length > 0 && allDoctor.map((item, index) =>{
+                                let imageBase64 = '';
+                                if(item.image){
+                                    // const imageBuffer = Buffer.from(JSON.stringify(user.image))
+                                    imageBase64 = new Buffer(item.image, 'base64').toString('binary');
+                                }
                                 let nameVi = `${item.positionData.valueVi}, ${item.firstName} ${item.lastName}`;
                                 let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
 
                                 return(
                                     <div className="section-share" key={index}>
                                         <div className="section-customize">
-                                            <div className="bg-image doctor-img">
-                                                {/* <img src={doctorImg} /> */}
+                                            <div className="bg-image doctor-img" 
+                                                style={{ backgroundImage: `url(${imageBase64})` }}>
                                             </div>
                                             <div className='position text-center'>
                                                 <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
