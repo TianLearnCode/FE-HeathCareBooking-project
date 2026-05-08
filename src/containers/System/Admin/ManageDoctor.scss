@@ -1,0 +1,93 @@
+.manage-doctor-container {
+    padding: 20px 50px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+
+    .manage-doctor-title {
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    .more-infor {
+        display: flex;
+        gap: 25px; // Tạo khoảng cách giữa 2 cột
+        margin-bottom: 25px;
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .content-left {
+            width: 35%;
+            // Tùy chỉnh Select của react-select để đồng bộ
+            .form-control {
+                border: none;
+                padding: 0;
+            }
+        }
+
+        .content-right {
+            width: 65%;
+            textarea {
+                border-radius: 8px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                outline: none;
+                transition: border 0.3s;
+                
+                &:focus {
+                    border-color: #45a049;
+                    box-shadow: 0 0 5px rgba(69, 160, 73, 0.2);
+                }
+            }
+        }
+    }
+
+    .manage-doctor-editor {
+        margin-bottom: 30px;
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        // Làm đẹp MdEditor
+        .rc-md-editor {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+    }
+
+    .save-content-doctor {
+        display: block;
+        width: 200px;
+        margin: 0 auto;
+        padding: 12px 20px;
+        background-color: #6c62de;; // Màu cam nổi bật hoặc xanh dương #007bff
+        color: white;
+        border: none;
+        // border-radius: 30%;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: #865cea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
