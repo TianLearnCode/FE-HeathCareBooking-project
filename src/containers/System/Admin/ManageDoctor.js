@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {getAllUsers} from '../../../services/userService'
 import { connect } from 'react-redux';
+import { LANGUAGES, CRUD_ACTION, CRUD_ACTIONS, CommonUtils } from '../../../utils';
+
 import './ManageDoctor.scss'
 import * as actions from '../../../store/actions' 
 import MdEditor from 'react-markdown-editor-lite/lib/index.js';
@@ -25,22 +27,56 @@ class ManageDoctor extends Component {
             contentMarkdown:'',
             contentHTML: '',
             selectedDoctor: '',
-            description: ''
+            description: '',
+            listDoctors: []
         }
     }
 
 
     async componentDidMount() {
         // this.props.getFetchUserData();
+        this.props.fetchAllDoctorStart();
     }
     componentDidUpdate(prevProps, prevState, snapShot){
+        if(prevProps.allDoctors !== this.props.allDoctors){
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+            this.setState({
+                listDoctors: dataSelect
+            })
+        }
+        if(prevProps.language !== this.props.language){
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+            this.setState({
+                listDoctors: dataSelect
+            })
+        }
+    }
+
+    buildDataInputSelect = (inputdata)=>{
+        let result = [];
+        if(inputdata && inputdata.length > 0){
+            inputdata.map((item, index)=>{
+                let object = {};
+                let labelvi = `${item.firstName} ${item.lastName}`;
+                let labelen = `${item.lastName} ${item.firstName}`;
+                object.label = this.props.language === LANGUAGES.VI ? labelvi : labelen;
+                object.value = item.id;
+                result.push(object);
+            })
+        }
+        return result;
     }
     state = {
 
     }
 
     handleSaveMarkdownData = () =>{
-        alert('Clicked')
+        this.props.saveDetailDoctorStart({
+            contentHTML: this.state.contentHTML,
+            contentMarkdown: this.state.contentMarkdown,
+            description: this.state.description,
+            doctorId: this.state.selectedDoctor.value
+        }) 
     }
     handleOnChangeDescription = (event) =>{
         this.setState({
@@ -48,17 +84,21 @@ class ManageDoctor extends Component {
         })
     }
 
-    handleChange = ()=>{
+    handleChange = (selectedDoctor) =>{
         this.setState({selectedDoctor});
         console.log('selected option is: ', selectedDoctor)
     }
     handleEditorChange = ({ html, text }) => {
         console.log('Nội dung HTML:', html);
         console.log('Nội dung Text:', text);
+        this.setState({
+            contentMarkdown: text,
+            contentHTML: html
+        });
     }
     
     render() {
-       
+       console.log('Check state: ', this.state)
         return (
            <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
@@ -71,7 +111,7 @@ class ManageDoctor extends Component {
                         <Select
                             value={this.state.selectedDoctor}
                             onChange={this.handleChange}
-                            options={options}
+                            options={this.state.listDoctors}
                             placeholder="Tìm kiếm bác sĩ..."
                         />
                     </div>
@@ -94,6 +134,7 @@ class ManageDoctor extends Component {
                         renderHTML={text => mdParser.render(text)} 
                         onChange={this.handleEditorChange} 
                         placeholder="Viết nội dung Markdown tại đây..."
+                        value={this.state.contentMarkdown}
                     />
                 </div>
 
@@ -110,11 +151,16 @@ class ManageDoctor extends Component {
 
 const mapStateToProps = state => {
     return {
+        allDoctors: state.admin.allDoctors,
+        language: state.app.language, //state của app (appReducer) được định nghĩa trong rootReducer
+
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchAllDoctorStart: () => dispatch(actions.fetchAllDoctorStart()),
+        saveDetailDoctorStart: (data) => dispatch(actions.saveDetailDoctorStart(data))
         
     };
 };

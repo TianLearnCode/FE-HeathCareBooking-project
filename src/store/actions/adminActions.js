@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService, createNewUserService, getAllUsers, deleteUserService, editUserService, getTopDoctorHomeService } from '../../services/userService';//gọi hàm xử lý việc gọi api 
+import { getAllCodeService, createNewUserService, getAllUsers, deleteUserService, editUserService, getTopDoctorHomeService, getAllDoctor, getAllDoctors, saveDetailDoctorService } from '../../services/userService';//gọi hàm xử lý việc gọi api 
 import { dispatch } from '../../redux';
 import {toast} from 'react-toastify'
 import { act } from 'react';
@@ -245,5 +245,61 @@ export const fetchTopDoctorSuccess = (doctorData) =>({
 })
 export const fetchTopDoctorFailed = ()=>({
     type: actionTypes.FETCH_TOP_DOCTOR_FAILED,
+})
+
+//=========================get all doctor===================
+export const fetchAllDoctorStart = () => {
+    return async(dispatch, getState) =>{
+        try{
+            let response = await getAllDoctors()
+            if(response && response.errCode === 0){
+                dispatch(fetchAllDoctorSuccess(response.data))
+            }else{
+                dispatch(fetchAllDoctorFailed())
+            }
+        }
+        catch(e){
+            dispatch(fetchAllDoctorFailed())
+            console.log('Fetch all doctor fail: ', e)
+        }
+    }
+}
+
+export const fetchAllDoctorSuccess = (doctorData) =>({
+    type: actionTypes.FETCH_ALL_DOCTOR_SUCCESS,
+    data: doctorData
+})
+export const fetchAllDoctorFailed = () =>({
+    type: actionTypes.FETCH_ALL_DOCTOR_FAILED,
+})
+
+//=========================save detail doctor===================
+export const saveDetailDoctorStart = (data) =>{
+    return async(dispatch, getState) =>{
+        try{
+            let response = await saveDetailDoctorService(data)
+            if(response && response.errCode === 0){
+                dispatch(saveDetailDoctorSuccess())
+                toast.success('Save detail doctor succeed!!!')
+            }else{
+                dispatch(saveDetailDoctorFailed())
+                toast.error('Save detail doctor failed!!!', response.errMessage)
+            }
+
+
+        }
+        catch(e){
+            dispatch(saveDetailDoctorFailed())
+            toast.error('Save detail doctor failed!!!')
+            console.log('Save detail doctor failed: ', e)
+        }
+        
+    }
+}
+export const saveDetailDoctorSuccess = () =>({
+    type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
+})
+export const saveDetailDoctorFailed = () =>({
+    type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED
 })
 //Chạy đến reducer

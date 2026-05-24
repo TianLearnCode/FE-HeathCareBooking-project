@@ -7,7 +7,8 @@ const initialState = {
     roles: [],// state role
     positions: [],//...
     users: [],
-    topDoctor: []
+    topDoctor: [],
+    allDoctors: []
 }
 
 const adminRecuder = (state = initialState, action) => {
@@ -105,6 +106,20 @@ const adminRecuder = (state = initialState, action) => {
         case actionTypes.FETCH_TOP_DOCTOR_FAILED:
             console.log('Fire fetch top doctor failed ', action)
             state.topDoctor = [];
+            return{
+                ...state
+            }
+
+        //=================case all doctor===========================
+        case actionTypes.FETCH_ALL_DOCTOR_SUCCESS:
+            console.log('Fire fetch all doctor success ', action)
+            state.allDoctors = action.data;
+            return {
+                ...state
+            }
+        case actionTypes.FETCH_ALL_DOCTOR_FAILED:
+            console.log('Fire fetch all doctor failed ', action)
+            state.allDoctors = [];
             return{
                 ...state
             }
