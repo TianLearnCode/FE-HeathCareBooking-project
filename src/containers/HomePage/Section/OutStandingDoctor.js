@@ -6,9 +6,10 @@ import doctorImg from '../../../assets/doctor/doctor.png'
 import { LANGUAGES } from '../../../utils';
 import * as actions from '../../../store/actions'
 import { FormattedMessage } from 'react-intl';
-
+import {withRouter} from 'react-router';
 class OutStandingDoctor extends Component {
     constructor(props){
+
         super(props)
         this.state = {
             arrDoctor: []
@@ -24,6 +25,11 @@ class OutStandingDoctor extends Component {
     }
     componentDidMount(){
         this.props.loadTopDoctor();
+    }
+    handleViewDetailDoctor = (doctor) =>{
+        // this.props.history.push(`/user/${doctor.id}`)
+        alert('xem chi tiết bác sĩ ' + doctor.firstName)
+        this.props.history.push(`/detail-doctor/${doctor.id}`)
     }
 
     render() {
@@ -49,7 +55,7 @@ class OutStandingDoctor extends Component {
                                 let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
 
                                 return(
-                                    <div className="section-share" key={index}>
+                                    <div className="section-share" key={index} onClick={()=> this.handleViewDetailDoctor(item)}>
                                         <div className="section-customize">
                                             <div className="bg-image doctor-img" 
                                                 style={{ backgroundImage: `url(${imageBase64})` }}>
@@ -90,4 +96,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor));
