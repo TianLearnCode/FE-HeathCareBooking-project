@@ -1,8 +1,7 @@
 .detail-doctor-container {
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 16px;
-    background-color: #ffffff;
+    padding: 0 16px 100px 16px; // Thêm 100px padding-bottom ở đây để đẩy nội dung cuối trang lên, không bị thanh fixed che khuất.    background-color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
     // ======================== BREADCRUMB ========================
@@ -387,6 +386,7 @@
     }
 
     // ======================== SUPPORT BOOKING BAR ========================
+    // ======================== SUPPORT BOOKING BAR ========================
     .support-booking-bar {
         display: flex;
         align-items: center;
@@ -434,14 +434,20 @@
             }
         }
 
+        // ĐÃ SỬA: Chuyển hẳn sang fixed để không phá vỡ luồng cuộn tự nhiên của trang web
         &.bottom-sticky {
-            position: sticky;
+            position: fixed; 
             bottom: 0;
-            background: #fff;
-            z-index: 100;
-            margin: 0 -16px;
-            padding: 16px;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+            left: 50%;
+            transform: translateX(-50%); // Căn giữa thanh fixed theo màn hình
+            width: 100%;
+            max-width: 960px; // Thừa hưởng đúng độ rộng bằng container cha của bạn
+            background: #ffffff;
+            z-index: 1000; // Đảm bảo luôn nổi lên trên cùng
+            padding: 16px 24px; // padding cân đối cho đẹp mắt
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08); // Bóng đổ mượt mà hướng lên trên
+            box-sizing: border-box; 
+            border-top: 1px solid #eaeaea;
         }
     }
 

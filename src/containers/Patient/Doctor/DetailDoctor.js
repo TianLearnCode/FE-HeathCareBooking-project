@@ -20,6 +20,7 @@ class DetailDoctor extends Component {
     }
 
     async componentDidMount() {
+        // window.scrollTo(0, 0);
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
             let res = await getDetailInforDoctor(id);
@@ -290,9 +291,9 @@ class DetailDoctor extends Component {
                             <div className='intro-content' dangerouslySetInnerHTML={{ __html: contentHtml }}></div>
                         ) : (
                             <div className='intro-content'>
-                                <p>Phó Giáo sư, Tiến sĩ, Bác sĩ Lâm Việt Trung đã có hơn 20 năm kinh nghiệm trong lĩnh vực Tiêu hóa.</p>
-                                <p>Là một bác sĩ giỏi, có bề dày kinh nghiệm cũng như chuyên môn cao, PGS.TS.BS Lâm Việt Trung là Nguyên trưởng khoa Ngoại tiêu hóa - Bệnh viện Chợ Rẫy và hiện đang giữ chức vụ Phó Giám Đốc Bệnh Viện Chợ Rẫy.</p>
-                                <p>Bác sĩ chuyên khám bệnh lý chuyên khoa ngoại tiêu hoá: thực quản, dạ dày, đại trực tràng, hậu môn trực tràng, sa sàn chậu, Thoát vị, tuyến giáp, tuyến vú, Gan mật Tụy.</p>
+                                {detailDoctor.MarkDown && detailDoctor.MarkDown.description
+                                    ? <span dangerouslySetInnerHTML={{ __html: detailDoctor.MarkDown.description }} />
+                                    : 'Không có thông tin giới thiệu về bác sĩ này.'}
                             </div>
                         )}
                     </div>
@@ -327,23 +328,18 @@ class DetailDoctor extends Component {
 
                     {/* Education Section */}
                     <div className='education-section'>
-                        <h2 className='section-title'>Quá trình đào tạo</h2>
-                        <ul className='education-list'>
-                            {education.map((item, index) => (
-                                <li key={index}>{item}</li>
-                            ))}
-                        </ul>
+                        {detailDoctor.MarkDown && detailDoctor.MarkDown.contentHTML ? (
+                            <div className='education-content' dangerouslySetInnerHTML={{ __html: detailDoctor.MarkDown.contentHTML }}></div>
+                        ) : (
+                            <div className='education-content'>
+                                <p>Không có thông tin học vấn về bác sĩ này.</p>
+                            </div>
+                        )}
                     </div>
 
-                    {/* Experience Section */}
-                    <div className='experience-section'>
-                        <h2 className='section-title'>Kinh nghiệm</h2>
-                        <div className='experience-list'>
-                            {experience.map((item, index) => (
-                                <p key={index}>{item}</p>
-                            ))}
-                        </div>
-                    </div>
+
+
+
 
                     {/* Sticky Bottom Support Bar */}
                     <div className='support-booking-bar bottom-sticky'>

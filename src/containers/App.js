@@ -15,6 +15,7 @@ import HomePage from './HomePage/HomePage.js'
 import CustomScrollbars from '../components/CustomScrollbars';
 import { Bounce } from "react-toastify";
 import DetailDoctor from './Patient/Doctor/DetailDoctor';
+
 class App extends Component {
 
     handlePersistorState = () => {
@@ -33,6 +34,16 @@ class App extends Component {
 
     componentDidMount() {
         this.handlePersistorState();
+        // Lắng nghe thay đổi trang và nhảy lên đỉnh ngay lập tức (không chạy hiệu ứng cuộn mượt)
+        this.unlisten = history.listen(() => {
+            window.scrollTo({ top: 0, behavior: 'auto' });
+        });
+    }
+
+    componentWillUnmount() {
+        if (this.unlisten) {
+            this.unlisten();
+        }
     }
 
     render() {
@@ -42,24 +53,15 @@ class App extends Component {
                     <div className="main-container">
                         {/* {this.props.isLoggedIn && <Header />} */}
                         <span className="content-container">
-                            {/* <CustomScrollbars style ={{height: "1000px", width:"100%"}}> */}
-                                <Switch>
-                                    <Route path={path.HOME} exact component={(Home)} />
-                                    <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                    <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                    <Route path={path.HOMEPAGE} component={HomePage} />
-                                    <Route path={path.DeTAIL_DOCTOR} component={DetailDoctor} />
-
-                                </Switch>
-                            {/* </CustomScrollbars> */}
+                            <Switch>
+                                <Route path={path.HOME} exact component={(Home)} />
+                                <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                <Route path={path.HOMEPAGE} component={HomePage} />
+                                <Route path={path.DeTAIL_DOCTOR} component={DetailDoctor} />
+                            </Switch>
                         </span>
 
-                        {/* <ToastContainer
-                            className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
-                            autoClose={false} hideProgressBar={true} pauseOnHover={false}
-                            pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
-                            closeButton={<CustomToastCloseButton />}
-                        /> */}
                         <ToastContainer
                             position="bottom-right"
                             autoClose={2000}
