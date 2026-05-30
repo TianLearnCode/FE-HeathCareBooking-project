@@ -1,37 +1,67 @@
-.login-background{
+.login-background {
     height: 100vh;
-    background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
-    background-image: linear-gradient(to top, #67d2f6 0%, #fed6e3 100%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f9fc; // Match home background
 }
 
-.login-container{
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    width: 25%;
-    min-width: 400px;
-    background-image: linear-gradient(-225deg, #edfffa 0%, #ffdcde 100%);
-    background-image: linear-gradient(to top, #ffffff 0%, #d4fff1 100%);
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    height: 450px;
-    .login-content{
-        //
-        .login-text{
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    padding: 36px 32px;
+    border-radius: 12px;
+    border: 1px solid #e2edf6;
+    box-shadow: 0 12px 28px rgba(15, 70, 115, 0.08);
+
+    .login-content {
+        .login-text {
             text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: rgba($color: #10a0e2, $alpha: 3.0)
+            font-size: 26px;
+            color: #0f172a;
+            margin-bottom: 28px;
+            
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &:after {
+                content: "";
+                width: 56px;
+                height: 4px;
+                margin-top: 10px;
+                border-radius: 999px;
+                background: #0071ba;
+            }
         }
 
-        .login-input{
+        .form-label {
+            color: #0f172a;
+            font-size: 14px;
+            font-weight: 600;
+        }
 
+        .form-control {
+            border: 1px solid #d8e8f6;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 15px;
+            color: #0f172a;
+            transition: all 0.2s ease;
+            box-shadow: none;
+
+            &:focus {
+                border-color: #8bc8ee;
+                background: #eef8ff;
+                outline: none;
+            }
+            
+            &::placeholder {
+                color: #94a3b8;
+                font-weight: 400;
+            }
         }
 
         .custom-input-password {
@@ -41,58 +71,113 @@
 
             span {
                 position: absolute;
-                right: 15px; // Cách lề phải
+                right: 15px;
                 cursor: pointer;
                 z-index: 10;
-                color: #666;
+                color: #64748b;
+                transition: color 0.2s ease;
 
                 &:hover {
-                    color: #000;
+                    color: #0071ba;
                 }
             }
 
             input {
-                padding-right: 40px; // Để chữ không bị đè lên icon
+                padding-right: 40px;
             }
         }
 
-        .login-btn{
-            height: 36px;
-            outline: none;
-            background: #68f1fb;
-        }
-        
+        .login-btn {
+            height: 44px;
+            border: none;
+            border-radius: 8px;
+            background: #0071ba;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 113, 186, 0.15);
 
-
-        .login-btn:hover {
-            // Thêm !important nếu bị Bootstrap đè màu
-            background-color: #60e4c7 !important; 
-            animation: ani9 0.4s ease-in-out infinite alternate;
-        }
-
-        // Bạn phải định nghĩa hiệu ứng ani9 ở đây
-        @keyframes ani9 {
-            from {
-                transform: scale(1);
-                box-shadow: 0 0 5px rgba(0,0,0,0.2);
-            }
-            to {
-                transform: scale(1.05); // Nút to lên một chút khi hover
-                box-shadow: 0 0 15px rgba(114, 239, 211, 0.5);
+            &:hover {
+                background: #005f9e;
+                transform: translateY(-1px);
+                box-shadow: 0 10px 22px rgba(0, 113, 186, 0.22);
             }
         }
-        .forgot-password{
-            text-align: right;
-            margin-top: 10px;
+
+        .forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
             font-size: 14px;
-            color: #10a0e2;
-        }
-        .text-order-login{
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s ease;
 
+            &:hover {
+                color: #0071ba;
+            }
         }
-        .social-login{
 
+        .text-order-login {
+            color: #64748b;
+            font-size: 13px;
+            margin: 24px 0 16px;
+            position: relative;
+
+            &:before, &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                width: 30%;
+                height: 1px;
+                background: #e2edf6;
+            }
+
+            &:before {
+                left: 0;
+            }
+
+            &:after {
+                right: 0;
+            }
+        }
+
+        .social-login {
+            gap: 16px;
+
+            i {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                background: #eef8ff;
+                font-size: 18px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                
+                &.google {
+                    color: #ea4335;
+                    border: 1px solid rgba(234, 67, 53, 0.2);
+                    &:hover {
+                        background: #ea4335;
+                        color: #ffffff;
+                        box-shadow: 0 8px 16px rgba(234, 67, 53, 0.2);
+                    }
+                }
+                
+                &.facebook {
+                    color: #1877f2;
+                    border: 1px solid rgba(24, 119, 242, 0.2);
+                    &:hover {
+                        background: #1877f2;
+                        color: #ffffff;
+                        box-shadow: 0 8px 16px rgba(24, 119, 242, 0.2);
+                    }
+                }
+            }
         }
     }
 }
-

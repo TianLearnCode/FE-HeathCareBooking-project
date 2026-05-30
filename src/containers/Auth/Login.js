@@ -70,17 +70,17 @@ class Login extends Component {
         //jsx
         return (
             <div className='login-background'>
-                <div className='login-container rounded-5 shadow-lg'>
-                    <div className='login-content row p-2'>
+                <div className='login-container'>
+                    <div className='login-content row'>
                         <div className='col-12 login-text'>Log In</div>
-                        <div className='col-12 form-group mb-4'>
-                            <label className='form-label fw-bold'>Username: </label>
+                        <div className='col-12 form-group mb-3'>
+                            <label className='form-label'>Username: </label>
                             <input className='form-control login-input' type='text' placeholder='Enter your username' 
                             value={this.state.username} 
                             onChange={(event)=>this.handleOnChangeUsername(event)}/>
                         </div>
-                        <div className='col-12 form-group mb-4'>
-                            <label className='form-label fw-bold'>Password: </label>
+                        <div className='col-12 form-group mb-3'>
+                            <label className='form-label'>Password: </label>
                             <div className='custom-input-password'>
                                 <input 
                                     className='form-control login-input' 
@@ -96,11 +96,11 @@ class Login extends Component {
                             </div>
 
                         </div>
-                        <div className="col-12 mt-1" style={{ color: 'red' }}>
+                        <div className="col-12 mt-1" style={{ color: '#ef4444', fontSize: '13px', textAlign: 'center', minHeight: '20px' }}>
                             {this.state.loginError}
                         </div>
                         <div className='col-12 mt-3'>
-                            <button className='login-btn btn mb-3 w-100 rounded-pill text-primary shadow-lg'
+                            <button className='login-btn w-100'
                             onClick={()=>this.handleLogin()}>
                                 Log In
                             </button>
@@ -109,13 +109,13 @@ class Login extends Component {
                             <span className='forgot-password'>Forgot your password?</span>
                         </div>
 
-                        <div className='text-order-login col-12 text-center mt-4 mb-3 fst-italic text-secondary'>
-                            <span className=''>Or log in with:</span>
+                        <div className='text-order-login col-12 text-center'>
+                            <span className=''>Or log in with</span>
                         </div>
                         
-                        <div className='col-12 social-login text-center fs-2 d-flex justify-content-center gap-3'>
-                            <i className="fab fa-google google text-danger "></i>
-                            <i className="fab fa-facebook facebook text-primary"></i>
+                        <div className='col-12 social-login text-center d-flex justify-content-center'>
+                            <i className="fab fa-google google"></i>
+                            <i className="fab fa-facebook facebook"></i>
                         </div>
 
                     </div>
