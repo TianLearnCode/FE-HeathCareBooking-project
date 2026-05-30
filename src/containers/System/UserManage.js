@@ -198,55 +198,71 @@ class UserManage extends Component {
                 <div className="container mt-5">
 
                     <div className="row justify-content-center">
-                        <div className="col-12 col-xl-11">
-                            <h2>Get users</h2>
-                            <button className="btn btn-primary mb-3 px-3" onClick={() => this.handleAddNewUser()}>
-                                <i className="fas fa-plus"></i> Add New User
-                            </button>            
-                            <div className="table-responsive shadow-sm">
-                                <table className="table table-info table-striped table-hover table-bordered">
-                                    <thead className="table-dark">
+                        <div className="col-12">
+                            <div className="user-table-card">
+                                <div className="user-table-toolbar">
+                                    <div>
+                                        <h2 className="user-table-title">User list</h2>
+                                        <div className="user-table-subtitle">{arrUsers && arrUsers.length ? arrUsers.length : 0} users in system</div>
+                                    </div>
+                                    <button className="btn-add-user" onClick={() => this.handleAddNewUser()}>
+                                        <i className="fas fa-plus"></i>
+                                        <span>Add New User</span>
+                                    </button>
+                                </div>
 
-                                        <tr>
-                                        <th scope="col">id</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Phone Number</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Role</th>
-                                        <th scope="col" className='text-center'>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                <div className="user-table-responsive">
+                                    <table className="user-management-table">
+                                        <thead>
 
-                                        { arrUsers && arrUsers.map((item, index) =>{
-                                            // console.log('check data: ', item, index)
+                                            <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Phone Number</th>
+                                            <th scope="col">Address</th>
+                                            <th scope="col">Role</th>
+                                            <th scope="col" className='text-center'>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                            return (
-                                                <tr key = {item.id}>
-                                                    <td>{item.id}</td>
-                                                    <td>{item.firstName}</td>
-                                                    <td>{item.lastName}</td>
-                                                    <td>{item.email}</td>
-                                                    <td>{item.phoneNumber}</td>
-                                                    <td>{item.address}</td>
-                                                    <td>{item.roleId}</td>
-                                                    <td className='text-center'> 
-                                                        <button className='btn-edit' onClick={() => this.handleEditUser(item)}><i className='fas fa-pencil-alt'></i></button> 
-                                                        <button className='btn-delete' onClick={() => this.handleDeleteUser(item)}><i className='fas fa-trash-alt'></i></button> 
+                                            { arrUsers && arrUsers.length > 0 ? arrUsers.map((item, index) =>{
+                                                // console.log('check data: ', item, index)
 
+                                                return (
+                                                    <tr key = {item.id}>
+                                                        <td><span className="user-id">#{item.id}</span></td>
+                                                        <td className="fw-semibold">{item.firstName}</td>
+                                                        <td>{item.lastName}</td>
+                                                        <td className="user-email">{item.email}</td>
+                                                        <td>{item.phoneNumber}</td>
+                                                        <td className="user-address">{item.address}</td>
+                                                        <td><span className="role-badge">{item.roleId}</span></td>
+                                                        <td className='text-center'>
+                                                            <div className="table-actions">
+                                                                <button className='btn-edit' onClick={() => this.handleEditUser(item)} title="Edit user"><i className='fas fa-pencil-alt'></i></button>
+                                                                <button className='btn-delete' onClick={() => this.handleDeleteUser(item)} title="Delete user"><i className='fas fa-trash-alt'></i></button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    )
+                                                })
+                                                :
+                                                <tr>
+                                                    <td colSpan="8" className="empty-users">
+                                                        <i className="far fa-folder-open"></i>
+                                                        <span>No users found</span>
                                                     </td>
                                                 </tr>
-                                                )
-                                            })
+                                            }
 
-                                        }
-                                        
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     

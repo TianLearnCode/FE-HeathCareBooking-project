@@ -2,103 +2,179 @@
 
 .navigator-menu {
     display: flex;
+    align-items: center;
+    gap: 8px;
     margin: 0;
     padding: 0;
+
     &.list-unstyled,
     .list-unstyled {
         list-style-type: none;
     }
+
     .menu-group {
+        position: relative;
+        border-radius: 8px;
+
         &:hover {
             cursor: pointer;
-            background-color: darken($colormain, 5);
-        }
-        .menu-group-name {
-            line-height: 40px;
-            padding: 0 15px;
-            border-right: 1px solid $border;
-            &:first-child {
-                border-left: 1px solid $border;
+
+            .menu-group-name {
+                color: #0071ba;
+                background: #eef8ff;
+            }
+
+            .menu-list {
+                display: block;
             }
         }
+
+        .menu-group-name {
+            height: 40px;
+            line-height: 40px;
+            padding: 0 14px;
+            border-radius: 8px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
         .menu-list {
             display: none;
-            background-color: $bg-menu-color;
-            box-shadow: 2px 2px 4px 0 $box-shadow-color;
-            -webkit-box-shadow: 2px 2px 4px 0 $box-shadow-color;
-            color: $text-in-light;
+            min-width: 235px;
+            margin-top: 10px;
+            padding: 8px;
             position: absolute;
-            padding: 0;
+            left: 0;
+            top: 100%;
+            z-index: 1000;
+            color: $text-in-light;
+            background: #ffffff;
+            border: 1px solid #e6eef7;
+            border-radius: 8px;
+            box-shadow: 0 18px 45px rgba(15, 70, 115, 0.16);
+
+            &:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: -10px;
+                height: 10px;
+            }
+
             .menu {
-                width: 205px;
-                padding: 0 15px;
-                height: 35px;
-                line-height: 35px;
+                min-height: 40px;
+                line-height: 40px;
+                padding: 0 12px;
+                position: relative;
+                border-radius: 6px;
                 text-transform: none;
+                transition: all 0.2s ease;
 
                 &.active {
-                    a{
-                        color: orange !important;
+                    background: #eef8ff;
 
+                    a {
+                        color: #0071ba !important;
                     }
-                    background-color: rgb(234, 234, 234);
                 }
+
                 .menu-link {
+                    display: block;
+                    color: #334155;
+                    font-size: 14px;
+                    font-weight: 600;
                     text-decoration: none;
-                    color: $text-in-light;
+                    white-space: nowrap;
                 }
+
                 .sub-menu-list {
                     display: none;
-                    background-color: $bg-menu-color;
-                    box-shadow: 2px 2px 4px 0 $box-shadow-color;
-                    -webkit-box-shadow: 2px 2px 4px 0 $box-shadow-color;
+                    min-width: 230px;
+                    padding: 8px;
                     position: absolute;
-                    top: 0;
-                    left: 205px;
-                    padding: 0;
+                    top: -8px;
+                    left: calc(100% + 8px);
+                    background: #ffffff;
+                    border: 1px solid #e6eef7;
+                    border-radius: 8px;
+                    box-shadow: 0 18px 45px rgba(15, 70, 115, 0.16);
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: -8px;
+                        width: 8px;
+                    }
+
                     .sub-menu {
-                        padding: 0 15px;
-                        height: 35px;
-                        line-height: 35px;
+                        min-height: 38px;
+                        line-height: 38px;
+                        padding: 0 12px;
+                        border-radius: 6px;
                         white-space: nowrap;
+                        transition: all 0.2s ease;
+
                         &:hover {
-                            background-color: darken($bg-menu-color, 5);
+                            background: #f2f8fd;
                         }
+
                         .sub-menu-link {
-                            text-decoration: none;
-                            color: $text-in-light;
-                        }
-                        a {
                             display: block;
+                            color: #334155;
+                            font-size: 14px;
+                            font-weight: 600;
+                            text-decoration: none;
                         }
+
                         &.active a {
-                            font-weight: 500;
-                            color: $colormain;
+                            color: #0071ba;
+                            font-weight: 700;
                         }
                     }
                 }
+
                 &.active span {
-                    font-weight: 500;
-                    color: $colormain;
+                    color: #0071ba;
+                    font-weight: 700;
                 }
+
                 &:hover {
-                    background-color: darken($bg-menu-color, 3);
+                    background: #f2f8fd;
+
+                    .menu-link {
+                        color: #0071ba;
+                    }
+
                     .sub-menu-list {
                         display: block;
                     }
                 }
+
                 .icon-right {
                     display: block;
                     position: absolute;
                     top: 0;
-                    right: 10px;
+                    right: 12px;
+                    color: #94a3b8;
                 }
             }
         }
-        &:hover {
-            .menu-list {
-                display: block;
-            }
+    }
+}
+
+@media (max-width: 1100px) {
+    .navigator-menu {
+        overflow-x: auto;
+        padding-bottom: 2px;
+
+        .menu-group {
+            flex: 0 0 auto;
         }
     }
 }

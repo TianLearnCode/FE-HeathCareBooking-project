@@ -1,33 +1,223 @@
-.btn-edit{
-    width: 50px;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: chocolate;
+.users-container {
+    padding-bottom: 36px;
+    background: #f5f9fc;
 
-    &:hover{
-        background-color: transparent !important;
-        color: chocolate;
+    .title {
+        padding-top: 24px;
+        color: #0f172a;
+        font-size: 28px;
+        font-weight: 700;
     }
 }
 
-.btn-delete{
-    width: 50px;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: rgb(248, 25, 25);
+.user-table-card {
+    overflow: hidden;
+    border: 1px solid #e2edf6;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 14px 36px rgba(15, 70, 115, 0.08);
+}
 
-    &:hover{
-        background-color: transparent !important;
-        color: rgb(210, 30, 30);
+.user-table-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 22px;
+    border-bottom: 1px solid #e8f0f8;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
+}
+
+.user-table-title {
+    margin: 0;
+    color: #0f172a;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.user-table-subtitle {
+    margin-top: 5px;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-add-user {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 8px;
+    color: #ffffff;
+    background: #0071ba;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 8px 18px rgba(0, 113, 186, 0.22);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #005f9d;
+        box-shadow: 0 10px 22px rgba(0, 113, 186, 0.3);
     }
 }
 
-.modal-user-container{
-    .modal-content{
-        .modal-header{
-            button{
+.user-table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.user-management-table {
+    width: 100%;
+    min-width: 980px;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    thead {
+        background: #eef8ff;
+
+        th {
+            padding: 14px 16px;
+            border-bottom: 1px solid #d8e8f6;
+            color: #0f5f9f;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+    }
+
+    tbody {
+        tr {
+            transition: background 0.2s ease, box-shadow 0.2s ease;
+
+            &:hover {
+                background: #f8fcff;
+            }
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #eef3f8;
+            color: #334155;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+    }
+}
+
+.fw-semibold {
+    color: #0f172a !important;
+    font-weight: 700;
+}
+
+.user-id {
+    display: inline-flex;
+    align-items: center;
+    min-width: 42px;
+    color: #0071ba;
+    font-weight: 800;
+}
+
+.user-email,
+.user-address {
+    max-width: 230px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    color: #006b52;
+    background: #e7f8f3;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.table-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-edit,
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    i {
+        font-size: 14px;
+    }
+}
+
+.btn-edit {
+    color: #0071ba;
+    background: #eaf6ff;
+
+    &:hover {
+        color: #ffffff;
+        background: #0071ba;
+        box-shadow: 0 8px 16px rgba(0, 113, 186, 0.22);
+    }
+}
+
+.btn-delete {
+    color: #dc2626;
+    background: #fff1f2;
+
+    &:hover {
+        color: #ffffff;
+        background: #dc2626;
+        box-shadow: 0 8px 16px rgba(220, 38, 38, 0.22);
+    }
+}
+
+.empty-users {
+    height: 120px;
+    color: #94a3b8 !important;
+    text-align: center;
+
+    i {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 26px;
+    }
+
+    span {
+        font-size: 14px;
+        font-weight: 700;
+    }
+}
+
+.modal-user-container {
+    .modal-content {
+        .modal-header {
+            button {
                 background-color: transparent !important;
                 outline: none;
                 border: none;
@@ -37,5 +227,16 @@
             }
         }
     }
-    
+
+}
+
+@media (max-width: 768px) {
+    .user-table-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .btn-add-user {
+        width: 100%;
+    }
 }

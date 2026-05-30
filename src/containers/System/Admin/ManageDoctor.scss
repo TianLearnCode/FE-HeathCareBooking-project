@@ -1,93 +1,251 @@
 .manage-doctor-container {
-    padding: 20px 50px;
-    background-color: #f8f9fa;
     min-height: 100vh;
+    padding: 28px 36px 40px;
+    background: #f5f9fc;
+}
 
-    .manage-doctor-title {
-        text-align: center;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: #2c3e50;
-        margin-bottom: 30px;
+.manage-doctor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 22px;
+
+    h2 {
+        margin: 4px 0 0;
+        color: #0f172a;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 0;
+    }
+}
+
+.manage-doctor-eyebrow {
+    color: #0071ba;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.doctor-content-card {
+    margin-bottom: 22px;
+    padding: 22px;
+    border: 1px solid #e2edf6;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 14px 36px rgba(15, 70, 115, 0.08);
+}
+
+.card-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: #0f172a;
+    font-size: 17px;
+    font-weight: 800;
+
+    i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        color: #0071ba;
+        background: #eef8ff;
+        font-size: 15px;
+    }
+}
+
+.more-infor {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.9fr) minmax(420px, 1.6fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.form-field {
+    label {
+        display: block;
+        margin-bottom: 9px;
+        color: #334155;
+        font-size: 14px;
+        font-weight: 800;
+    }
+}
+
+.doctor-select__control {
+    min-height: 48px !important;
+    border-color: #d8e8f6 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+
+    &:hover {
+        border-color: #8bc8ee !important;
+    }
+}
+
+.doctor-select__control--is-focused {
+    border-color: #0071ba !important;
+    box-shadow: 0 0 0 3px rgba(0, 113, 186, 0.1) !important;
+}
+
+.doctor-select__placeholder,
+.doctor-select__single-value {
+    color: #475569 !important;
+    font-size: 15px !important;
+}
+
+.doctor-select__indicator-separator {
+    background-color: #d8e8f6 !important;
+}
+
+.doctor-select__menu {
+    overflow: hidden !important;
+    border: 1px solid #e2edf6 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 14px 32px rgba(15, 70, 115, 0.14) !important;
+}
+
+.doctor-description {
+    min-height: 132px;
+    padding: 14px 16px;
+    border: 1px solid #d8e8f6;
+    border-radius: 8px;
+    color: #334155;
+    font-size: 15px;
+    line-height: 1.55;
+    resize: vertical;
+    box-shadow: none;
+    transition: all 0.2s ease;
+
+    &:focus {
+        border-color: #0071ba;
+        box-shadow: 0 0 0 3px rgba(0, 113, 186, 0.1);
+    }
+}
+
+.editor-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.editor-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 22px 18px;
+    border-bottom: 1px solid #e8f0f8;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
+
+    .card-section-title {
+        margin-bottom: 6px;
+    }
+}
+
+.editor-subtitle {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.manage-doctor-editor {
+    padding: 18px 22px 22px;
+
+    .rc-md-editor {
+        overflow: hidden;
+        border: 1px solid #d8e8f6;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 10px 24px rgba(15, 70, 115, 0.06);
     }
 
+    .rc-md-navigation {
+        min-height: 48px;
+        border-bottom: 1px solid #e8f0f8;
+        background: #f8fbfd;
+    }
+
+    .button-wrap .button {
+        color: #64748b;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            color: #0071ba;
+            background: #eef8ff;
+        }
+    }
+
+    .editor-container {
+        .sec-md,
+        .sec-html {
+            background: #ffffff;
+        }
+
+        .sec-md {
+            border-right: 1px solid #eef3f8;
+        }
+
+        textarea {
+            padding: 18px !important;
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        .custom-html-style {
+            padding: 18px;
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+    }
+}
+
+.save-content-doctor {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 42px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 8px;
+    color: #ffffff;
+    background: #0071ba;
+    font-size: 14px;
+    font-weight: 800;
+    box-shadow: 0 10px 22px rgba(0, 113, 186, 0.24);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #005f9d;
+        box-shadow: 0 12px 26px rgba(0, 113, 186, 0.32);
+    }
+}
+
+@media (max-width: 992px) {
+    .manage-doctor-container {
+        padding: 20px;
+    }
+
+    .manage-doctor-header,
     .more-infor {
-        display: flex;
-        gap: 25px; // Tạo khoảng cách giữa 2 cột
-        margin-bottom: 25px;
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #444;
-        }
-
-        .content-left {
-            width: 35%;
-            // Tùy chỉnh Select của react-select để đồng bộ
-            .form-control {
-                border: none;
-                padding: 0;
-            }
-        }
-
-        .content-right {
-            width: 65%;
-            textarea {
-                border-radius: 8px;
-                border: 1px solid #ccc;
-                padding: 10px;
-                outline: none;
-                transition: border 0.3s;
-                
-                &:focus {
-                    border-color: #45a049;
-                    box-shadow: 0 0 5px rgba(69, 160, 73, 0.2);
-                }
-            }
-        }
+        grid-template-columns: 1fr;
     }
 
-    .manage-doctor-editor {
-        margin-bottom: 30px;
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: #444;
-        }
-        
-        // Làm đẹp MdEditor
-        .rc-md-editor {
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #ccc;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
+    .manage-doctor-header {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
     .save-content-doctor {
-        display: block;
-        width: 200px;
-        margin: 0 auto;
-        padding: 12px 20px;
-        background-color: #6c62de;; // Màu cam nổi bật hoặc xanh dương #007bff
-        color: white;
-        border: none;
-        // border-radius: 30%;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-
-        &:hover {
-            background-color: #865cea;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        &:active {
-            transform: translateY(0);
-        }
+        width: 100%;
     }
 }
