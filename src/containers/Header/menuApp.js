@@ -15,8 +15,8 @@ export const adminMenu = [
                 link: '/system/manage-doctor'
             },
             {
-                name: 'menu.doctor.schedule', 
-                link: '/system/schedule-manage'
+                name: 'menu.doctor.manage-schedule', 
+                link: '/doctor/manage-schedule'
             }
         ]
     },
@@ -50,15 +50,23 @@ export const adminMenu = [
 ];
 
 export const doctorMenu = [
-    { // Quản lý lịch khám bệnh dành riêng cho Doctor
-        name: 'menu.doctor.manage-schedule', 
+    {
+
+    
+        name: 'menu.admin.user-manage', 
         menus: [
-            {
-                name: 'menu.doctor.schedule', 
-                link: '/system/schedule-manage' // Sửa lại đúng đường dẫn quản lý lịch
+
+            { // Quản lý lịch khám bệnh dành riêng cho Doctor
+                
+    
+                name: 'menu.doctor.manage-schedule', 
+                link: '/doctor/manage-schedule' // Sửa lại đúng đường dẫn quản lý lịch
+                
+                
             }
-        ]
+        ]   
     }
+
 ];
     
 
