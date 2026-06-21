@@ -66,6 +66,11 @@
     "homepage": {
         "outstanding-doc": "Last week's featured doctor",
         "see-more":"See more"
+    },
+    "manage-schedule": {
+        "title": "Doctor's schedule management",
+        "select-date": "Select date",
+        "save": "Save information"
     }
 
     

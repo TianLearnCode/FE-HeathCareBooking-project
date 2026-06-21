@@ -181,6 +181,7 @@ const mapStateToProps = state => {
     return {
         allDoctors: state.admin.allDoctors,
         language: state.app.language,
+        
 
     };
 };
